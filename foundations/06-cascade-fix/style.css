@@ -8,7 +8,20 @@ body{
   font-weight: 800;
 }
 
-.small-para {
+/*
+   SOLUTION: Chaining both class selectors.
+
+   This makes text smaller because the rule has higher specificity
+   than the rule with `.para` selector.
+
+   Other possible solutions:
+   - chaining selector `p.small-para` for higher specificity
+   - changing the order of the rules, by putting the rule with
+     `.para` selector BEFORE the `.small-para` one.
+     It works because it has the same specificity level with `.para`,
+     thus, the Rule Order factor would apply.
+*/
+.para.small-para {
   font-size: 14px;
   font-weight: 800;
 }
@@ -17,7 +30,18 @@ body{
   font-size: 22px;
 }
 
-.confirm {
+/*
+  SOLUTION: Use ID selector, which has higher specificity than class selector.
+
+
+  Other possible solutions:
+  - using chaining selector to chain the two class attributes of the button,
+    `.button.confirm`, which would have higher specificity than one class
+    selector (`.button` rule, which targets both button elements).
+  - Change the order which would work because of the Rule Order factor, since
+  two different rules with one class have the same specificity level
+*/
+#confirm-button {
   background: green;
   color: white;
   font-weight: bold;
@@ -29,7 +53,26 @@ body{
   font-size: 20px;
 }
 
-.child {
+/*
+  SOLUTION: remove the `div` selector from `div.text` chaining selector, and
+            reverse the order of the rules (rule with `.child` being the last)
+
+  This makes both rules have the same specificity level, and the Rule Order
+  factor will apply. So, the conflicting declarations from the less specific rule
+  won't get applied, because has lower specificity level.
+
+  Could also just chain `div` selector with `.child` selector, to make them equal
+  in specificity level, and Rule Order would still apply after reversing the order.
+
+
+  Other possible solutions:
+  - make `.child` rule with higher specificity, by adding more selectors using
+    the chaining selector:
+      - div.text.child
+      -.text.child
+  - 
+*/
+.text.child {
   color: rgb(0, 0, 0);
   font-weight: 800;
   font-size: 14px;
